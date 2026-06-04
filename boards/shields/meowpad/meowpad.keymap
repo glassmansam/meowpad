@@ -1,0 +1,14 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/rgb.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &rgb_ug RGB_TOG
+            >;
+        };
+    };
+};

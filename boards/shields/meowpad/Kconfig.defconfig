@@ -1,0 +1,6 @@
+if SHIELD_MEOWPAD
+
+config ZMK_KEYBOARD_NAME
+    default "Meowpad"
+
+endif
