@@ -1,6 +1,6 @@
 file_format: "1"
-id: ledtest
-name: LED Test
+id: meowpad
+name: Meowpad
 type: shield
 requires: [pro_micro]
 features:
