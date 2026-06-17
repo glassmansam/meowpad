@@ -8,11 +8,12 @@
 
         default_layer {
             bindings = <
-                &kp N1           &kp N2           &kp N3           &kp N4
+                &rgb_ug RGB_TOG  &kp N2           &kp N3           &kp N4
                 &kp Q            &kp W            &kp E            &kp R
                 &kp A            &kp S            &kp D            &kp F
                 &rgb_ug RGB_TOG  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_EFF
             >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 };
