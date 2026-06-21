@@ -3,4 +3,13 @@ if SHIELD_MEOWPAD
 config ZMK_KEYBOARD_NAME
     default "Meowpad"
 
+# bluetooth stuff 
+
+config BT_MAX_CONN
+    default 4
+
+config BT_MAX_PAIRED
+    default 4
+
+
 endif

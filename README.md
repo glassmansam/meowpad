@@ -31,6 +31,15 @@ Adjust the board name to match your target. Consult the ZMK documentation for fl
 - [boards/shields/meowpad/meowpad.conf](boards/shields/meowpad/meowpad.conf)
 - [zephyr/module.yml](zephyr/module.yml)
 
+## Current firmware setup
+
+- `build.yaml` now produces both a normal `meowpad` build and a `meowpad_with_studio` build with `CONFIG_ZMK_STUDIO=y`.
+- The keymap includes:
+  - a base layer,
+  - an `Fn` layer for symbols, F-keys, and `&studio_unlock`,
+  - a `Bluetooth` layer with direct access to ZMK profiles 0-4 plus USB/BLE output switching,
+  - two reserved extra layers that can be filled in through ZMK Studio later.
+
 ## Contributing
 
 Feel free to open issues or PRs to update keymaps, overlays, or add new board support.
