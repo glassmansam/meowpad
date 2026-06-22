@@ -46,11 +46,12 @@ Consult the ZMK documentation for flashing steps for your controller.
 - `build.yaml` produces both a normal `meowpad` build and a `meowpad_with_studio` build with `CONFIG_ZMK_STUDIO=y`.
 - The keymap includes:
   - a `Base` layer,
-  - an `Fn` layer for editing shortcuts, Bluetooth access, and ZMK Studio unlock,
+  - an `Fn` layer for editing shortcuts, Bluetooth access, and jumping into the Terminal layer,
   - a `Bluetooth` layer with direct access to ZMK profiles 0-4 plus USB/BLE output switching,
   - `YouTube` and `VLC/mpv` media layers,
   - an `Edit` layer for common desktop editing shortcuts,
   - `Onshape`, `OS Sketch`, and `OS View` layers,
+  - a persistent `Terminal` layer tuned for zsh/readline navigation and control,
   - three RGB encoder layers for brightness, hue, and effect control,
   - two reserved Studio-only expansion layers.
 
@@ -72,9 +73,10 @@ ZMK Studio changes are gated behind the `&studio_unlock` behavior.
 On the current Meowpad keymap, unlock it like this:
 
 1. Hold the `fn` key on the base layer.
-2. While holding it, press the bottom-right key (`m4` position).
+2. While holding it, press the bottom-row third key to enter the `Bluetooth` layer.
+3. On the `Bluetooth` layer, press the bottom-right key.
 
-That key is bound to `&studio_unlock` on the `Fn` layer. After pressing it, the board stays unlocked until ZMK Studio disconnects or times out from inactivity.
+That bottom-right key on the `Bluetooth` layer is bound to `&studio_unlock`. After pressing it, the board stays unlocked until ZMK Studio disconnects or times out from inactivity.
 
 ### How to connect
 
@@ -142,7 +144,7 @@ The `Fn` layer provides:
 - undo, redo, copy, paste, cut, select all, find, and save
 - screenshot and terminal-launch shortcuts
 - a jump to the `Bluetooth` layer
-- `&studio_unlock` on the bottom-right key
+- a persistent jump to the `Terminal` layer on the bottom-right key
 
 ### Bluetooth layer
 
@@ -165,6 +167,23 @@ Both media layers keep encoder rotation on volume.
 ### Edit layer
 
 The `Edit` layer mirrors the editing shortcuts from `Fn`, but gives them a dedicated workflow page with `Backspace`, `Delete`, `Space`, and `Enter` on the bottom row.
+
+### Terminal layer
+
+The `Terminal` layer is persistent and optimized for zsh/readline-style shell control rather than long command macros.
+
+- Enter it with `Fn + m4`
+- Return to the base layer with the top-left key
+- Top row: base, open terminal, terminal copy, terminal paste
+- Second row: `Ctrl+C`, `Ctrl+D`, `Ctrl+Z`, and `fg`
+- Third row: line start, line end, word-left, word-right
+- Bottom row: kill-left, kill-right, delete-previous-word, reverse history search
+
+The keymap also defines, but does not place, these terminal command macros for later experimentation:
+
+- `term_ls`
+- `term_cd_up`
+- `term_git_status`
 
 ### Onshape layers
 

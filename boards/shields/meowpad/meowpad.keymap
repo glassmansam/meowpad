@@ -16,6 +16,7 @@
 #define ONSHAPE    9
 #define OS_SKETCH  10
 #define OS_VIEW    11
+#define TERM       12
 
 / {
     behaviors {
@@ -41,6 +42,32 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp LS(Z)>, <&kp Z>;
+        };
+    };
+
+    macros {
+        term_fg: term_fg {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp F &kp G &kp ENTER>;
+        };
+
+        term_ls: term_ls {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp L &kp S &kp SPACE &kp MINUS &kp L &kp A &kp H &kp ENTER>;
+        };
+
+        term_cd_up: term_cd_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp C &kp D &kp SPACE &kp DOT &kp DOT &kp ENTER>;
+        };
+
+        term_git_status: term_git_status {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp G &kp I &kp T &kp SPACE &kp S &kp T &kp A &kp T &kp U &kp S &kp ENTER>;
         };
     };
 
@@ -82,17 +109,17 @@
             /*
              * Function layer:
              *
-             * |esc | --- | bspc | del    |
-             * |undo| redo| copy | paste  |
-             * | cut| all | find | save   |
-             * |snip| term| bt   | studio |
+             * |esc | --- | bspc | del  |
+             * |undo| redo| copy | paste|
+             * | cut| all | find | save |
+             * |snip| term| bt   | term |
              */
             display-name = "Fn";
             bindings = <
                 &kp ESC          &trans          &kp BSPC        &kp DEL
                 &kp LC(Z)        &kp LC(Y)       &kp LC(C)       &kp LC(V)
                 &kp LC(X)        &kp LC(A)       &kp LC(F)       &kp LC(S)
-                &kp LC(LS(S))    &kp LC(LA(T))   &to BT          &studio_unlock
+                &kp LC(LS(S))    &kp LC(LA(T))   &to BT          &to TERM
             >;
         };
 
@@ -293,12 +320,35 @@
             sensor-bindings = <&onshape_zoom_encoder>;
         };
 
+        terminal_layer {
+            /*
+             * Terminal layer:
+             *
+             * |base | term | tcopy | tpaste |
+             * | c-c | c-d  | c-z   |  fg    |
+             * | c-a | c-e  | a-b   |  a-f   |
+             * | c-u | c-k  | c-w   |  c-r   |
+             */
+            display-name = "Terminal";
+            bindings = <
+                &to BASE         &kp LC(LA(T))   &kp LC(LS(C))   &kp LC(LS(V))
+                &kp LC(C)        &kp LC(D)       &kp LC(Z)       &term_fg
+                &kp LC(A)        &kp LC(E)       &kp LA(B)       &kp LA(F)
+                &kp LC(U)        &kp LC(K)       &kp LC(W)       &kp LC(R)
+            >;
+        };
+
         studio_extra_1 {
             /* Reserved for future ZMK Studio expansion. */
             status = "reserved";
         };
 
         studio_extra_2 {
+            /* Reserved for future ZMK Studio expansion. */
+            status = "reserved";
+        };
+
+        studio_extra_3 {
             /* Reserved for future ZMK Studio expansion. */
             status = "reserved";
         };
