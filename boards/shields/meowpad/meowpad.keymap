@@ -18,6 +18,16 @@
 #define OS_VIEW    11
 #define TERM       12
 
+/*
+ * Debug override for encoder bring-up. This keeps the shield overlay as-is
+ * while forcing the tested P0.29/P0.31 pin order and a very obvious step rate.
+ */
+&encoder {
+    a-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* D20/A2 -> P0.29 */
+    b-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* D21/A3 -> P0.31 */
+    steps = <20>;
+};
+
 / {
     behaviors {
         rgb_encoder_bri: rgb_encoder_bri {
@@ -121,6 +131,7 @@
                 &kp LC(X)        &kp LC(A)       &kp LC(F)       &kp LC(S)
                 &kp LC(LS(S))    &kp LC(LA(T))   &to BT          &to TERM
             >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         bluetooth_layer {
@@ -139,6 +150,7 @@
                 &out OUT_USB     &out OUT_BLE    &bt BT_CLR      &bt BT_CLR_ALL
                 &to BASE         &trans          &trans          &studio_unlock
             >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         media_layer {
@@ -202,6 +214,7 @@
                 &kp LC(X)        &kp LC(A)       &kp LC(F)       &kp LC(S)
                 &kp BSPC         &kp DEL         &kp SPACE       &kp ENTER
             >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         encoder_brightness_layer {
@@ -336,6 +349,7 @@
                 &kp LC(A)        &kp LC(E)       &kp LA(B)       &kp LA(F)
                 &kp LC(U)        &kp LC(K)       &kp LC(W)       &kp LC(R)
             >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         studio_extra_1 {
